@@ -92,3 +92,7 @@ Nx Cloud pairs with Nx in order to enable you to build and test code more rapidl
 Teams using Nx gain the advantage of building full-stack applications with their preferred framework alongside Nx’s advanced code generation and project dependency graph, plus a unified experience for both frontend and backend developers.
 
 Visit [Nx Cloud](https://nx.app/) to learn more.
+
+* npm i pnpm@5
+* pnpm install --global create-nx-workspace@12
+* pnpm init nx-workspace wenlin-site --preset=empty --package-manager=npm --npm-scope=wenlin-site --nx-cloud=true
