@@ -6,18 +6,27 @@
   "projects": {},
   "generators": {
     "@nrwl/angular:application": {
-      "style": "scss",
+      "e2eTestRunner": "cypress",
+      "inlineStyle": true,
+      "inlineTemplate": true,
       "linter": "eslint",
+      "prefix": "wl",
+      "skipTests": true,
+      "strict": true,
+      "style": "scss",
+      "tags": "type:app",
       "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress"
+      "viewEncapsulation": "None"
     },
     "@nrwl/angular:library": {
-      "style": "scss",
       "linter": "eslint",
+      "strict": true,
+      "style": "scss",
       "unitTestRunner": "jest"
     },
-    "@nrwl/angular:component": {
-      "style": "scss"
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush",
+      "displayBlock": true
     }
   }
 }
