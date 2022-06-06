@@ -9,7 +9,9 @@
     "format": "nx format:write"
   },
   "private": true,
-  "dependencies": {},
+  "dependencies": {
+    "@nrwl/angular": "12"
+  },
   "devDependencies": {
     "@nrwl/cli": "12.10.1",
     "@nrwl/nx-cloud": "latest",
