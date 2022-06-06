@@ -97,3 +97,4 @@ Visit [Nx Cloud](https://nx.app/) to learn more.
 * pnpm install --global create-nx-workspace@12
 * pnpm init nx-workspace wenlin-site --preset=empty --package-manager=npm --npm-scope=wenlin-site --nx-cloud=true
 * pnpm install @nrwl/angular@12
+* nx generate @nrwl/angular:init
