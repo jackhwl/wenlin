@@ -3,6 +3,7 @@
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
+  "defaultProject": "wenlin-site-app",
   "projects": {
     "wenlin-site-app": {
       "projectType": "application",
@@ -151,6 +152,6 @@
     "@nrwl/angular:component": {
       "style": "scss"
     }
-  },
-  "defaultProject": "wenlin-site-app"
+  }
+
 }
