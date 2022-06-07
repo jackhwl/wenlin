@@ -1,5 +1,14 @@
 name: Wenlin Site CI
 
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+  workflow_dispatch:
+    branches:
+    
 jobs:
   build: 
     runs-on: ubuntu-latest

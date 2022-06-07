@@ -3,30 +3,155 @@
   "cli": {
     "defaultCollection": "@nrwl/angular"
   },
-  "projects": {},
+  "defaultProject": "wenlin-site-app",
+  "projects": {
+    "wenlin-site-app": {
+      "projectType": "application",
+      "root": "apps/wenlin-site-app",
+      "sourceRoot": "apps/wenlin-site-app/src",
+      "prefix": "wl",
+      "targets": {
+        "build": {
+          "executor": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/wenlin-site-app",
+            "index": "apps/wenlin-site-app/src/index.html",
+            "main": "apps/wenlin-site-app/src/main.ts",
+            "polyfills": "apps/wenlin-site-app/src/polyfills.ts",
+            "tsConfig": "apps/wenlin-site-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/wenlin-site-app/src/favicon.ico",
+              "apps/wenlin-site-app/src/assets"
+            ],
+            "styles": ["apps/wenlin-site-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/wenlin-site-app/src/environments/environment.ts",
+                  "with": "apps/wenlin-site-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "executor": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "wenlin-site-app:build:production"
+            },
+            "development": {
+              "browserTarget": "wenlin-site-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "executor": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "wenlin-site-app:build"
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/wenlin-site-app/src/**/*.ts",
+              "apps/wenlin-site-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/wenlin-site-app"],
+          "options": {
+            "jestConfig": "apps/wenlin-site-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "wenlin-site-app-e2e": {
+      "root": "apps/wenlin-site-app-e2e",
+      "sourceRoot": "apps/wenlin-site-app-e2e/src",
+      "projectType": "application",
+      "targets": {
+        "e2e": {
+          "executor": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/wenlin-site-app-e2e/cypress.json",
+            "devServerTarget": "wenlin-site-app:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "wenlin-site-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "outputs": ["{options.outputFile}"],
+          "options": {
+            "lintFilePatterns": ["apps/wenlin-site-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  },
   "generators": {
     "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
       "e2eTestRunner": "cypress",
       "inlineStyle": true,
       "inlineTemplate": true,
-      "linter": "eslint",
       "prefix": "wl",
       "skipTests": true,
       "strict": true,
-      "style": "scss",
       "tags": "type:app",
-      "unitTestRunner": "jest",
       "viewEncapsulation": "None"
     },
     "@nrwl/angular:library": {
-      "linter": "eslint",
-      "strict": true,
       "style": "scss",
-      "unitTestRunner": "jest"
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "strict": true
     },
     "@schematics/angular:component": {
       "changeDetection": "OnPush",
       "displayBlock": true
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
     }
   }
+
 }

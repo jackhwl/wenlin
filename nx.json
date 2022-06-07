@@ -29,5 +29,13 @@
       }
     ]
   },
-  "projects": {}
+  "projects": {
+    "wenlin-site-app": {
+      "tags": ["type:app"]
+    },
+    "wenlin-site-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["wenlin-site-app"]
+    }
+  }
 }
