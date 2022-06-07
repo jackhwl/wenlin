@@ -4,6 +4,35 @@
     "defaultCollection": "@nrwl/angular"
   },
   "defaultProject": "wenlin-site-app",
+  "generators": {
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress",
+      "inlineStyle": true,
+      "inlineTemplate": true,
+      "prefix": "wl",
+      "skipTests": true,
+      "strict": true,
+      "tags": "type:app",
+      "viewEncapsulation": "None"
+    },
+    "@nrwl/angular:library": {
+      "linter": "eslint",
+      "prefix": "nrg",
+      "strict": true,
+      "style": "scss",
+      "unitTestRunner": "jest"
+    },
+    "@schematics/angular:component": {
+      "changeDetection": "OnPush",
+      "displayBlock": true
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
   "projects": {
     "wenlin-site-app": {
       "projectType": "application",
@@ -123,34 +152,6 @@
           }
         }
       }
-    }
-  },
-  "generators": {
-    "@nrwl/angular:application": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "e2eTestRunner": "cypress",
-      "inlineStyle": true,
-      "inlineTemplate": true,
-      "prefix": "wl",
-      "skipTests": true,
-      "strict": true,
-      "tags": "type:app",
-      "viewEncapsulation": "None"
-    },
-    "@nrwl/angular:library": {
-      "style": "scss",
-      "linter": "eslint",
-      "unitTestRunner": "jest",
-      "strict": true
-    },
-    "@schematics/angular:component": {
-      "changeDetection": "OnPush",
-      "displayBlock": true
-    },
-    "@nrwl/angular:component": {
-      "style": "scss"
     }
   }
 
