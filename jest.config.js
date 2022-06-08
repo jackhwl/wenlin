@@ -1,5 +1,6 @@
-const { getJestProjects } = require('@nrwl/jest');
-
 module.exports = {
-  projects: getJestProjects(),
+  projects: [
+    '<rootDir>/apps/wenlin-site-app',
+    '<rootDir>/libs/root/environments',
+  ],
 };
