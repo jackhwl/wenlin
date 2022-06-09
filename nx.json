@@ -30,17 +30,20 @@
     ]
   },
   "projects": {
-    "wenlin-site-app": {
-      "tags": ["type:app"]
+    "co2-data-access": {
+      "tags": ["scope:co2"]
     },
     "root-assets": {
       "tags": ["scope:root", "type:assets"]
     },
+    "root-environments": {
+      "tags": ["scope:root", "type:environments"]
+    },
     "root-styles": {
       "tags": ["scope:root", "type:styles"]
     },
-    "root-environments": {
-      "tags": ["scope:root", "type:environments"]
+    "wenlin-site-app": {
+      "tags": ["type:app"]
     },
     "wenlin-site-app-e2e": {
       "tags": [],

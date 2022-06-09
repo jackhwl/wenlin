@@ -19,11 +19,11 @@
       "viewEncapsulation": "None"
     },
     "@nrwl/angular:library": {
-      "linter": "eslint",
-      "prefix": "nrg",
-      "strict": true,
       "style": "scss",
-      "unitTestRunner": "jest"
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "prefix": "wl",
+      "strict": true
     },
     "@schematics/angular:component": {
       "changeDetection": "OnPush",
@@ -34,6 +34,68 @@
     }
   },
   "projects": {
+    "co2-data-access": {
+      "projectType": "library",
+      "root": "libs/co2/data-access",
+      "sourceRoot": "libs/co2/data-access/src",
+      "prefix": "wl",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/co2/data-access"],
+          "options": {
+            "jestConfig": "libs/co2/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/co2/data-access/src/**/*.ts",
+              "libs/co2/data-access/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "root-assets": {
+      "projectType": "library",
+      "root": "libs/root/assets",
+      "sourceRoot": "libs/root/assets/src",
+      "targets": {}
+    },
+    "root-environments": {
+      "projectType": "library",
+      "root": "libs/root/environments",
+      "sourceRoot": "libs/root/environments/src",
+      "prefix": "wl",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/root/environments"],
+          "options": {
+            "jestConfig": "libs/root/environments/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/root/environments/src/**/*.ts",
+              "libs/root/environments/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "root-styles": {
+      "projectType": "library",
+      "root": "libs/root/styles",
+      "sourceRoot": "libs/root/styles/src",
+      "targets": {}
+    },
     "wenlin-site-app": {
       "projectType": "application",
       "root": "apps/wenlin-site-app",
@@ -60,7 +122,7 @@
                 "glob": "**/*",
                 "input": "libs/root/assets/src/assets",
                 "output": "assets"
-              }             
+              }
             ],
             "styles": ["libs/root/styles/src/index.scss"],
             "scripts": []
@@ -135,43 +197,6 @@
         }
       }
     },
-    "root-assets": {
-      "projectType": "library",
-      "root": "libs/root/assets",
-      "sourceRoot": "libs/root/assets/src",
-      "targets": {}
-    },
-    "root-styles": {
-      "projectType": "library",
-      "root": "libs/root/styles",
-      "sourceRoot": "libs/root/styles/src",
-      "targets": {}
-    },
-    "root-environments": {
-      "projectType": "library",
-      "root": "libs/root/environments",
-      "sourceRoot": "libs/root/environments/src",
-      "prefix": "nrg",
-      "targets": {
-        "test": {
-          "executor": "@nrwl/jest:jest",
-          "outputs": ["coverage/libs/root/environments"],
-          "options": {
-            "jestConfig": "libs/root/environments/jest.config.js",
-            "passWithNoTests": true
-          }
-        },
-        "lint": {
-          "executor": "@nrwl/linter:eslint",
-          "options": {
-            "lintFilePatterns": [
-              "libs/root/environments/src/**/*.ts",
-              "libs/root/environments/src/**/*.html"
-            ]
-          }
-        }
-      }
-    },
     "wenlin-site-app-e2e": {
       "root": "apps/wenlin-site-app-e2e",
       "sourceRoot": "apps/wenlin-site-app-e2e/src",
@@ -199,5 +224,4 @@
       }
     }
   }
-
 }
