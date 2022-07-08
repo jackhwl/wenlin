@@ -45,9 +45,9 @@ describe(Co2ForecastStore.name, () => {
             // Arrange
             const expectedRecords: Co2EmissionPrognosisRecords = [
                 {
-                    co2Emission: 80,
-                    minutes5UTC: new Date('2022-06-11T20:11-04:00'),
-                    priceArea: 'DK1'
+                    CO2Emission: 80,
+                    Minutes5UTC: new Date('2022-06-11T20:11-04:00'),
+                    PriceArea: 'DK1'
                 }
             ]
             const httpGetSpy = jest.fn().mockReturnValue(of(expectedRecords))

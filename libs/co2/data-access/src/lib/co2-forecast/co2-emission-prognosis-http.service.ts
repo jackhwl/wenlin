@@ -18,15 +18,16 @@ export class Co2EmissionPrognosisHttp {
     get(dateQuery: DateQuery): Observable<Co2EmissionPrognosisRecords> {
         return this.http.get<Co2ApiResponse<Co2EmissionPrognosisRecord> | Co2ApiErrorsResponse>(energiDataServiceEndpoint, {
             params: {
-                resource_id: 'co2emisprog',
-                limit: 5
+                offset: 0,
+                limit: 5,
+                start: dateQuery.from.toISOString(),
+                end: dateQuery.to.toISOString()
             }
         }).pipe(
             mergeMap(response => 
                 response.success 
                 ? of(response.result.records.map(record => ({ 
-                    ...record,
-                    minutes5UTC: new Date(record.minutes5UTC)
+                    ...record
                 })))
                 : throwError(new Error('Co2 API Error'))
             )

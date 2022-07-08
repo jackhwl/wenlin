@@ -28,7 +28,10 @@ export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
 
     private loadRecordsEveryMinute = this.effect<DateQuery>(queryFilters$ => 
         combineLatest([queryFilters$, timer(0, 60 * 1000)]).pipe(
-            switchMap(queryFilter => this.http.get().pipe(
+            switchMap(queryFilter => this.http.get({
+                from: new Date(),
+                to: new Date()
+            }).pipe(
                 tapResponse(
                     //records => this.patchState({records}),
                     records => this.updateRecords(records),
