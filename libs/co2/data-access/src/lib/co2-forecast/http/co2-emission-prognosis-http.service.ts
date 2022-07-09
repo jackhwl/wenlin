@@ -6,7 +6,7 @@ import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from './co2-e
 import { Co2ApiResponse } from './co2-api-response'
 import { Co2ApiErrorsResponse } from './co2-api-errors-response'
 import { energiDataServiceEndpoint, energiDataSqlServiceEndpoint } from './energi-data-service-endpoint'
-import { DateQuery } from './date-query'
+import { DateQuery } from '../date-query'
 
 @Injectable({
     providedIn: 'root'

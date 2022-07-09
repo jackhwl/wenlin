@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core'
 import { ComponentStore, tapResponse } from '@ngrx/component-store'
 import { Observable, timer, combineLatest } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
-import { Co2EmissionPrognosisHttp } from './co2-emission-prognosis-http.service'
-import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from './co2-emission-prognosis-record'
-import { DateQuery } from './date-query'
+import { Co2EmissionPrognosisHttp } from '../http/co2-emission-prognosis-http.service'
+import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from '../http/co2-emission-prognosis-record'
+import { DateQuery } from '../date-query'
 
 interface Co2ForecastState {
     readonly records: Co2EmissionPrognosisRecords
