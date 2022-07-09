@@ -7,23 +7,25 @@ import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from '../http
 import { DateQuery } from '../date-query'
 
 interface Co2ForecastState {
+    readonly dateQuery: DateQuery
     readonly records: Co2EmissionPrognosisRecords
 }
 
 @Injectable()
 export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
+    private dateQuery$: Observable<DateQuery> = this.select(
+        state => state.dateQuery
+    ) 
+
     records$: Observable<Co2EmissionPrognosisRecords> = this.select(
         state => state.records,
         { debounce: true }
     )
     
     constructor(private http: Co2EmissionPrognosisHttp) {
-        super(initialState)
+        super(createInitialState(new Date()))
 
-        this.loadRecordsEveryMinute({
-            start: new Date(),
-            end: new Date()
-        })
+        this.loadRecordsEveryMinute(this.dateQuery$)
     }
 
     private loadRecordsEveryMinute = this.effect<DateQuery>(dateQuery$ => 
@@ -44,6 +46,13 @@ export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
     }))
 }
 
-const initialState: Co2ForecastState = {
-    records: []
+function createInitialState(now: Date): Co2ForecastState {
+    const twoDaysMs = 2 * 24 * 60 * 60 * 1000
+    return {
+        dateQuery: {
+            start: new Date(now),
+            end: new Date(now.valueOf() + twoDaysMs)
+        },
+        records: []
+    }
 }
