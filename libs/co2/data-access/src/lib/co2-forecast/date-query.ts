@@ -1,4 +1,4 @@
 export interface DateQuery {
-    readonly from: Date
-    readonly to: Date
+    readonly start: Date
+    readonly end: Date
 }

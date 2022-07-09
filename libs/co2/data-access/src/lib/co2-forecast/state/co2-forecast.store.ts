@@ -21,8 +21,8 @@ export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
         super(initialState)
 
         this.loadRecordsEveryMinute({
-            from: new Date(),
-            to: new Date()
+            start: new Date(),
+            end: new Date()
         })
     }
 

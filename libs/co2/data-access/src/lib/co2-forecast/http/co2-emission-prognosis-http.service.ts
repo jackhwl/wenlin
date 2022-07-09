@@ -20,8 +20,8 @@ export class Co2EmissionPrognosisHttp {
             params: {
                 offset: 0,
                 limit: 5,
-                start: dateQuery.from.toISOString(),
-                end: dateQuery.to.toISOString()
+                start: dateQuery.start.toISOString(),
+                end: dateQuery.end.toISOString()
             }
         }).pipe(
             mergeMap(response => 
