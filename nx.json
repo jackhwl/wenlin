@@ -31,7 +31,7 @@
   },
   "projects": {
     "co2-data-access": {
-      "tags": ["scope:co2"]
+      "tags": ["scope:co2", "type:data-access"]
     },
     "root-assets": {
       "tags": ["scope:root", "type:assets"]

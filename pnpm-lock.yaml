@@ -9,6 +9,7 @@ dependencies:
   '@angular/router': 12.2.16_62a15721f11178b1f34649767e096ce4
   '@ngrx/component-store': 12.5.1_@angular+core@12.2.16+rxjs@6.6.7
   '@nrwl/angular': 12.10.1_a3c8dbb031beb0fd161e4971137556dc
+  luxon: 3.0.1
   rxjs: 6.6.7
   tslib: 2.4.0
   zone.js: 0.11.5
@@ -28,6 +29,7 @@ devDependencies:
   '@nrwl/tao': 12.10.1
   '@nrwl/workspace': 12.10.1_prettier@2.6.2
   '@types/jest': 27.0.2
+  '@types/luxon': 2.3.2
   '@types/node': 14.14.33
   '@typescript-eslint/eslint-plugin': 4.31.2_6946eb0249059a7613730d6dec5d13ce
   '@typescript-eslint/parser': 4.31.2_eslint@7.22.0+typescript@4.3.5
@@ -3372,6 +3374,10 @@ packages:
   /@types/json5/0.0.29:
     resolution:
       integrity: sha512-dRLjCWHYg4oaA77cxO64oO+7JwCwnIzkZPdrrC71jQmQtlhM556pwKo5bUzqvZndkVbeFLIIi+9TC40JNF5hNQ==
+  /@types/luxon/2.3.2:
+    dev: true
+    resolution:
+      integrity: sha512-WOehptuhKIXukSUUkRgGbj2c997Uv/iUgYgII8U7XLJqq9W2oF0kQ6frEznRQbdurioz+L/cdaIm4GutTQfgmA==
   /@types/minimatch/3.0.5:
     dev: true
     resolution:
@@ -6494,7 +6500,7 @@ packages:
       integrity: sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==
   /fs-minipass/2.1.0:
     dependencies:
-      minipass: 3.1.6
+      minipass: 3.3.4
     dev: true
     engines:
       node: '>= 8'
@@ -8476,6 +8482,12 @@ packages:
       node: '>=10'
     resolution:
       integrity: sha512-Jo6dJ04CmSjuznwJSS3pUeWmd/H0ffTlkXXgwZi+eq1UCmqQwCh+eLsYOYCwY991i2Fah4h1BEMCx4qThGbsiA==
+  /luxon/3.0.1:
+    dev: false
+    engines:
+      node: '>=12'
+    resolution:
+      integrity: sha512-hF3kv0e5gwHQZKz4wtm4c+inDtyc7elkanAsBq+fundaCdUBNJB1dHEGUZIM6SfSBUlbVFduPwEtNjFK8wLtcw==
   /magic-string/0.25.7:
     dependencies:
       sourcemap-codec: 1.4.8
@@ -8729,9 +8741,17 @@ packages:
       node: '>=8'
     resolution:
       integrity: sha512-rty5kpw9/z8SX9dmxblFA6edItUmwJgMeYDZRrwlIVN27i8gysGbznJwUggw2V/FVqFSDdWy040ZPS811DYAqQ==
+  /minipass/3.3.4:
+    dependencies:
+      yallist: 4.0.0
+    dev: true
+    engines:
+      node: '>=8'
+    resolution:
+      integrity: sha512-I9WPbWHCGu8W+6k1ZiGpPu0GkoKBeorkfKNuAFBNS1HNFJvke82sxvI5bzcCNpWPorkOO5QQ+zomzzwRxejXiw==
   /minizlib/2.1.2:
     dependencies:
-      minipass: 3.1.6
+      minipass: 3.3.4
       yallist: 4.0.0
     dev: true
     engines:
@@ -11371,7 +11391,7 @@ packages:
     dependencies:
       chownr: 2.0.0
       fs-minipass: 2.1.0
-      minipass: 3.1.6
+      minipass: 3.3.4
       minizlib: 2.1.2
       mkdirp: 1.0.4
       yallist: 4.0.0
@@ -12383,6 +12403,7 @@ specifiers:
   '@nrwl/tao': ~12.10.1
   '@nrwl/workspace': ~12.10.1
   '@types/jest': ~27.0.2
+  '@types/luxon': ^2.3.2
   '@types/node': ~14.14.33
   '@typescript-eslint/eslint-plugin': ~4.31.1
   '@typescript-eslint/parser': ~4.31.1
@@ -12392,6 +12413,7 @@ specifiers:
   eslint-plugin-cypress: ^2.10.3
   jest: ~27.2.3
   jest-preset-angular: ~10.0.1
+  luxon: ^3.0.1
   prettier: ^2.3.1
   rxjs: ~6.6.0
   ts-jest: ~27.0.5
