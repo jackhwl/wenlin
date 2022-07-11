@@ -1,5 +1,5 @@
 import { DateTime, Duration, Interval } from "luxon";
-import { torontoZone } from "./toronto-zone";
+import { torontoZone } from "../date-time-util/toronto-zone";
 
 
 export function createCo2ForecastInteval(now: DateTime): Interval {

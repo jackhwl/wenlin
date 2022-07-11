@@ -1,6 +1,6 @@
 import { DateTime } from "luxon"
 import { createCo2ForecastInteval } from "./create-co2-forecast-inteval"
-import { torontoZone } from "./toronto-zone"
+import { torontoZone } from "../date-time-util/toronto-zone"
 
 describe(createCo2ForecastInteval.name, () => {
     it('the start of today is the beginning of the forecast', () => {
