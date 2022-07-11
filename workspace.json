@@ -59,6 +59,31 @@
         }
       }
     },
+    "co2-util-date-times": {
+      "projectType": "library",
+      "root": "libs/co2/util-date-times",
+      "sourceRoot": "libs/co2/util-date-times/src",
+      "prefix": "wl",
+      "targets": {
+        "test": {
+          "executor": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/co2/util-date-times"],
+          "options": {
+            "jestConfig": "libs/co2/util-date-times/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "executor": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/co2/util-date-times/src/**/*.ts",
+              "libs/co2/util-date-times/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "root-assets": {
       "projectType": "library",
       "root": "libs/root/assets",

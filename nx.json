@@ -33,6 +33,9 @@
     "co2-data-access": {
       "tags": ["scope:co2", "type:data-access"]
     },
+    "co2-util-date-times": {
+      "tags": ["scope:co2", "type:util"]
+    },
     "root-assets": {
       "tags": ["scope:root", "type:assets"]
     },
