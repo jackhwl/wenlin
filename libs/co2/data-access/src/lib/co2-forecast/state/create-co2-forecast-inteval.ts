@@ -1,8 +1,10 @@
 import { DateTime, Duration, Interval } from "luxon";
+import { torontoZone } from "./toronto-zone";
+
 
 export function createCo2ForecastInteval(now: DateTime): Interval {
-    const localToday = now.startOf('day')
-    const localDayAfterTomorrow = localToday.plus(Duration.fromISO('P2D'))
+    const torontoToday = now.setZone(torontoZone).startOf('day')
+    const torontoDayAfterTomorrow = torontoToday.plus(Duration.fromISO('P2D'))
 
-    return Interval.fromDateTimes(localToday, localDayAfterTomorrow)
+    return Interval.fromDateTimes(torontoToday, torontoDayAfterTomorrow)
 }
