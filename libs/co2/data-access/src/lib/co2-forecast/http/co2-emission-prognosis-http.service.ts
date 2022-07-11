@@ -6,7 +6,7 @@ import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from './co2-e
 import { Co2ApiResponse } from './co2-api-response'
 import { Co2ApiErrorsResponse } from './co2-api-errors-response'
 import { energiDataServiceEndpoint, energiDataSqlServiceEndpoint } from './energi-data-service-endpoint'
-import { DateQuery } from '../date-query'
+import { Interval } from 'luxon'
 
 @Injectable({
     providedIn: 'root'
@@ -15,13 +15,13 @@ import { DateQuery } from '../date-query'
 export class Co2EmissionPrognosisHttp {
     constructor(private http: HttpClient){}
 
-    get(dateQuery: DateQuery): Observable<Co2EmissionPrognosisRecords> {
+    get(interval: Interval): Observable<Co2EmissionPrognosisRecords> {
         return this.http.get<Co2ApiResponse<Co2EmissionPrognosisRecord> | Co2ApiErrorsResponse>(energiDataServiceEndpoint, {
             params: {
                 offset: 0,
                 limit: 5,
-                start: dateQuery.start.toISOString(),
-                end: dateQuery.end.toISOString()
+                start: interval.start.toISODate(),
+                end: interval.end.toISODate()
             }
         }).pipe(
             mergeMap(response => 

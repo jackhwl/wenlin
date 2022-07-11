@@ -4,17 +4,18 @@ import { Observable, timer, combineLatest } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 import { Co2EmissionPrognosisHttp } from '../http/co2-emission-prognosis-http.service'
 import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from '../http/co2-emission-prognosis-record'
-import { DateQuery } from '../date-query'
+import { DateTime, Interval } from 'luxon'
+import { createCo2ForecastInteval } from './create-co2-forecast-inteval'
 
 interface Co2ForecastState {
-    readonly dateQuery: DateQuery
+    readonly interval: Interval
     readonly records: Co2EmissionPrognosisRecords
 }
 
 @Injectable()
 export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
-    private dateQuery$: Observable<DateQuery> = this.select(
-        state => state.dateQuery
+    private interval$: Observable<Interval> = this.select(
+        state => state.interval
     ) 
 
     records$: Observable<Co2EmissionPrognosisRecords> = this.select(
@@ -23,14 +24,14 @@ export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
     )
     
     constructor(private http: Co2EmissionPrognosisHttp) {
-        super(createInitialState(new Date()))
+        super(createInitialState(DateTime.now()))
 
-        this.loadRecordsEveryMinute(this.dateQuery$)
+        this.loadRecordsEveryMinute(this.interval$)
     }
 
-    private loadRecordsEveryMinute = this.effect<DateQuery>(dateQuery$ => 
-        combineLatest([dateQuery$, timer(0, 60 * 1000)]).pipe(
-            switchMap(([dateQuery]) => this.http.get(dateQuery).pipe(
+    private loadRecordsEveryMinute = this.effect<Interval>(inteval$ => 
+        combineLatest([inteval$, timer(0, 60 * 1000)]).pipe(
+            switchMap(([inteval]) => this.http.get(inteval).pipe(
                 tapResponse(
                     //records => this.patchState({records}),
                     records => this.updateRecords(records),
@@ -46,13 +47,9 @@ export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
     }))
 }
 
-function createInitialState(now: Date): Co2ForecastState {
-    const twoDaysMs = 2 * 24 * 60 * 60 * 1000
+function createInitialState(now: DateTime): Co2ForecastState {
     return {
-        dateQuery: {
-            start: new Date(now),
-            end: new Date(now.valueOf() + twoDaysMs)
-        },
+        interval: createCo2ForecastInteval(now),
         records: []
     }
 }

@@ -5,7 +5,9 @@ import { Co2EmissionPrognosisHttp } from './co2-emission-prognosis-http.service'
 import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from './co2-emission-prognosis-record'
 import { energiDataServiceEndpoint } from './energi-data-service-endpoint'
 import { Co2ApiResponse } from './co2-api-response'
+import { DateTime, Interval } from 'luxon'
 
+const dummyInterval = Interval.fromDateTimes(DateTime.now(), DateTime.now())
 describe(Co2EmissionPrognosisHttp.name, () => {
     beforeEach(() => {
         TestBed.configureTestingModule({
@@ -42,10 +44,7 @@ describe(Co2EmissionPrognosisHttp.name, () => {
         }
 
         // Act
-        const whenResponse = http.get({
-            start: new Date(),
-            end: new Date()
-        }).toPromise()
+        const whenResponse = http.get(dummyInterval).toPromise()
         const testRequest = controller.expectOne(request => 
             request.method === 'GET' && request.url.startsWith(energiDataServiceEndpoint)
         )
@@ -82,10 +81,7 @@ describe(Co2EmissionPrognosisHttp.name, () => {
         }
 
         // Act
-        const whenResponse = http.get({
-            start: new Date(),
-            end: new Date()
-        }).toPromise()
+        const whenResponse = http.get(dummyInterval).toPromise()
         const testRequest = controller.expectOne(request => 
             request.method === 'GET' && request.url.startsWith(energiDataServiceEndpoint)
         )
@@ -105,10 +101,7 @@ describe(Co2EmissionPrognosisHttp.name, () => {
         }
 
         // Act
-        const whenErrorResponse = http.get({
-            start: new Date(),
-            end: new Date()
-        }).toPromise()
+        const whenErrorResponse = http.get(dummyInterval).toPromise()
         const testRequest = controller.expectOne(request => 
             request.method === 'GET' && request.url.startsWith(energiDataServiceEndpoint)
         )
