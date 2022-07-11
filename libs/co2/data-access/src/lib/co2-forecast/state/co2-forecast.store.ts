@@ -4,18 +4,20 @@ import { Observable, timer, combineLatest } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 import { Co2EmissionPrognosisHttp } from '../http/co2-emission-prognosis-http.service'
 import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from '../http/co2-emission-prognosis-record'
-import { DateTime, Interval } from 'luxon'
-import { createCo2ForecastInteval } from './create-co2-forecast-inteval'
+import { DateTime, Duration, Interval } from 'luxon'
+import { torontoZone } from '../date-time-util/toronto-zone'
+
+const twoDays = Duration.fromISO('P2D')
 
 interface Co2ForecastState {
-    readonly interval: Interval
+    readonly torontoToday: DateTime
     readonly records: Co2EmissionPrognosisRecords
 }
 
 @Injectable()
 export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
-    private interval$: Observable<Interval> = this.select(
-        state => state.interval
+    private torontoToday$: Observable<DateTime> = this.select(
+        state => state.torontoToday
     ) 
 
     records$: Observable<Co2EmissionPrognosisRecords> = this.select(
@@ -26,12 +28,12 @@ export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
     constructor(private http: Co2EmissionPrognosisHttp) {
         super(createInitialState(DateTime.now()))
 
-        this.loadRecordsEveryMinute(this.interval$)
+        this.loadRecordsEveryMinute(this.torontoToday$)
     }
 
-    private loadRecordsEveryMinute = this.effect<Interval>(inteval$ => 
-        combineLatest([inteval$, timer(0, 60 * 1000)]).pipe(
-            switchMap(([inteval]) => this.http.get(inteval).pipe(
+    private loadRecordsEveryMinute = this.effect<DateTime>(torontoToday$ => 
+        combineLatest([torontoToday$, timer(0, 60 * 1000)]).pipe(
+            switchMap(([torontoToday]) => this.http.get(Interval.fromDateTimes(torontoToday, torontoToday.plus(twoDays))).pipe(
                 tapResponse(
                     //records => this.patchState({records}),
                     records => this.updateRecords(records),
@@ -49,7 +51,7 @@ export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
 
 function createInitialState(now: DateTime): Co2ForecastState {
     return {
-        interval: createCo2ForecastInteval(now),
+        torontoToday: now.setZone(torontoZone).startOf('day'),
         records: []
     }
 }
