@@ -5,7 +5,7 @@ import { switchMap } from 'rxjs/operators'
 import { Co2EmissionPrognosisHttp } from '../http/co2-emission-prognosis-http.service'
 import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from '../http/co2-emission-prognosis-record'
 import { DateTime, Duration, Interval } from 'luxon'
-import { torontoZone } from '../date-time-util/toronto-zone'
+import { torontoZone } from '@wenlin-site/co2/util-date-times'
 
 const twoDays = Duration.fromISO('P2D')
 
