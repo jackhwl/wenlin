@@ -1,16 +1,17 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing'
-import { TestBed } from '@angular/core/testing'
+import { discardPeriodicTasks, fakeAsync, TestBed, tick } from '@angular/core/testing'
 import { Co2ForecastStore } from './co2-forecast.store'
 import { first, skip, take } from 'rxjs/operators'
-import { Observable, of, throwError } from 'rxjs'
+import { Observable, of, range, throwError } from 'rxjs'
 import { Co2EmissionPrognosisHttp } from '../http/co2-emission-prognosis-http.service'
 import { Co2EmissionPrognosisRecords } from '../http/co2-emission-prognosis-record'
+import { Interval } from 'luxon'
 
 describe(Co2ForecastStore.name, () => {
     function setup({
         httpGetSpy = jest.fn().mockReturnValue(of([]))
     }: {
-        readonly httpGetSpy?: jest.Mock<Observable<Co2EmissionPrognosisRecords>, []>
+        readonly httpGetSpy?: jest.Mock<Observable<Co2EmissionPrognosisRecords>, [Interval]>
     } = {}) {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
@@ -22,6 +23,7 @@ describe(Co2ForecastStore.name, () => {
         const store = TestBed.inject(Co2ForecastStore)
 
         return {
+            httpGetSpy,
             store
         }
     }
@@ -75,5 +77,27 @@ describe(Co2ForecastStore.name, () => {
             expect(httpGetSpy).toHaveBeenCalledTimes(1)
             expect(actualRecords).toEqual([])
         })
+
+        it('queries the CO2 Emission Progrosis API every minute', fakeAsync (() => {
+            // Arrange
+            const oneMinutesMs = 60 * 1000
+            const oneHourMinutes = 60
+            const initialRequestCount = 1
+
+            // Act
+            const { httpGetSpy } = setup()
+            // Initial effect
+            tick(0)
+
+            range(1, oneHourMinutes).forEach(minutesElaspsed => tick(oneMinutesMs))
+
+
+            // Assert
+            expect(httpGetSpy).toHaveBeenCalledTimes(initialRequestCount + oneHourMinutes)
+
+            // Teardown
+            discardPeriodicTasks()
+        }))
+
     })
 })
