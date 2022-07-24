@@ -6,7 +6,7 @@ import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from './co2-e
 import { Co2ApiResponse } from './co2-api-response'
 import { Co2ApiErrorsResponse } from './co2-api-errors-response'
 import { energiDataServiceEndpoint, energiDataSqlServiceEndpoint } from './energi-data-service-endpoint'
-import { Interval } from 'luxon'
+import { DateTime, Interval } from 'luxon'
 import { Co2EmissionPrognosisResponse } from './co2-emission-prognosis-response-item'
 
 @Injectable({
@@ -29,7 +29,7 @@ export class Co2EmissionPrognosisHttp {
                 response.success 
                 ? of(response.result.records.map(record => ({ 
                     ...record,
-                    minutes5Utc: DateTime.fromISO(record.minutes5UTC)
+                    minutes5UTC: DateTime.fromISO(record.minutes5UTC)
                 })))
                 : throwError(new Error('Co2 API Error'))
             )
