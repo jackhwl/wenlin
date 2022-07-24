@@ -5,13 +5,14 @@ import { first, skip, take } from 'rxjs/operators'
 import { Observable, of, range, throwError } from 'rxjs'
 import { Co2EmissionPrognosisHttp } from '../http/co2-emission-prognosis-http.service'
 import { Co2EmissionPrognosisRecords } from '../http/co2-emission-prognosis-record'
-import { Interval } from 'luxon'
+import { DateTime, Interval } from 'luxon'
+import { Co2EmissionPrognosisResponse } from '../http/co2-emission-prognosis-response-item'
 
 describe(Co2ForecastStore.name, () => {
     function setup({
         httpGetSpy = jest.fn().mockReturnValue(of([]))
     }: {
-        readonly httpGetSpy?: jest.Mock<Observable<Co2EmissionPrognosisRecords>, [Interval]>
+        readonly httpGetSpy?: jest.Mock<Observable<Co2EmissionPrognosisResponse>, [Interval]>
     } = {}) {
         TestBed.configureTestingModule({
             imports: [HttpClientTestingModule],
@@ -38,31 +39,32 @@ describe(Co2ForecastStore.name, () => {
         it('initially emits 0 records', async () => {
             const { store } = setup()
 
-            const records = await store.records$.pipe(first()).toPromise()
+            const records = await store.forecast$.pipe(first()).toPromise()
 
             expect(records).toEqual([])
         })
 
         it('immediately emits records on success response from the CO2 Emission Progrosis API', async () => {
             // Arrange
-            const expectedRecords: Co2EmissionPrognosisRecords = [
+            const result: Co2EmissionPrognosisResponse = [
                 {
-                    CO2Emission: 80,
-                    Minutes5UTC: new Date('2022-06-11T20:11-04:00'),
-                    PriceArea: 'DK1'
+                    co2Emission: 80,
+                    minutes5UTC: DateTime.fromISO('2022-06-11T20:11-04:00'),
+                    priceArea: 'DK1'
                 }
             ]
-            const httpGetSpy = jest.fn().mockReturnValue(of(expectedRecords))
+            const expectedForecast = result
+            const httpGetSpy = jest.fn().mockReturnValue(of(result))
             const { store } = setup({ httpGetSpy })
 
             // Act
-            const actualRecords = await store.records$
+            const actualRecords = await store.forecast$
                 .pipe(skip(1), take(1))
                 .toPromise()
 
             // Assert
             expect(httpGetSpy).toHaveBeenCalledTimes(1)
-            expect(actualRecords).toEqual(expectedRecords)
+            expect(actualRecords).toEqual(expectedForecast)
         })
 
         it('clears the records on error response from the CO2 Emission Progrosis API', async () => {
@@ -71,7 +73,7 @@ describe(Co2ForecastStore.name, () => {
             const { store } = setup({ httpGetSpy })
 
             // Act
-            const actualRecords = await store.records$.pipe(skip(1), take(1)).toPromise()
+            const actualRecords = await store.forecast$.pipe(skip(1), take(1)).toPromise()
 
             // Assert
             expect(httpGetSpy).toHaveBeenCalledTimes(1)

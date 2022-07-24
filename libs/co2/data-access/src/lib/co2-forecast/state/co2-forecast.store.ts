@@ -3,32 +3,29 @@ import { ComponentStore, tapResponse } from '@ngrx/component-store'
 import { Observable, timer, combineLatest } from 'rxjs'
 import { switchMap } from 'rxjs/operators'
 import { Co2EmissionPrognosisHttp } from '../http/co2-emission-prognosis-http.service'
-import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords } from '../http/co2-emission-prognosis-record'
+import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords, Co2EmissionPrognosisRecords as Co2ForecastItem } from '../http/co2-emission-prognosis-record'
 import { DateTime, Duration, Interval } from 'luxon'
-import { torontoZone } from '@wenlin-site/co2/util-date-times'
+import { TorontoDateStore, torontoZone } from '@wenlin-site/co2/util-date-times'
+import { Co2Forecast } from '../domain/co2-forecast'
+import { Co2EmissionPrognosisResponse } from '../http/co2-emission-prognosis-response-item'
 
 const twoDays = Duration.fromISO('P2D')
 
 interface Co2ForecastState {
-    readonly torontoToday: DateTime
-    readonly records: Co2EmissionPrognosisRecords
+    readonly forecast: Co2Forecast
 }
 
 @Injectable()
 export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
-    private torontoToday$: Observable<DateTime> = this.select(
-        state => state.torontoToday
-    ) 
-
-    records$: Observable<Co2EmissionPrognosisRecords> = this.select(
-        state => state.records,
+    forecast$: Observable<Co2Forecast> = this.select(
+        state => state.forecast,
         { debounce: true }
     )
     
-    constructor(private http: Co2EmissionPrognosisHttp) {
-        super(createInitialState(DateTime.now()))
+    constructor(private http: Co2EmissionPrognosisHttp, torontoDate: TorontoDateStore) {
+        super(initialState)
 
-        this.loadRecordsEveryMinute(this.torontoToday$)
+        this.loadRecordsEveryMinute(torontoDate.today$)
     }
 
     private loadRecordsEveryMinute = this.effect<DateTime>(torontoToday$ => 
@@ -36,23 +33,20 @@ export class Co2ForecastStore extends ComponentStore<Co2ForecastState>{
             switchMap(([torontoToday]) => this.http.get(Interval.fromDateTimes(torontoToday, torontoToday.plus(twoDays))).pipe(
                 tapResponse(
                     //records => this.patchState({records}),
-                    records => this.updateRecords(records),
-                    () => this.updateRecords([])
+                    result => this.updateForecast(result),
+                    () => this.updateForecast([])
                 )
             ))
         )
     )
 
-    private updateRecords = this.updater<Co2EmissionPrognosisRecords>(
-        (state, records): Co2ForecastState => ({
+    private updateForecast = this.updater<Co2EmissionPrognosisResponse>(
+        (state, response): Co2ForecastState => ({
         ...state,
-        records
+        forecast: response
     }))
 }
 
-function createInitialState(now: DateTime): Co2ForecastState {
-    return {
-        torontoToday: now.setZone(torontoZone).startOf('day'),
-        records: []
-    }
+const initialState: Co2ForecastState = {
+    forecast: [],
 }

@@ -29,9 +29,9 @@ describe(Co2EmissionPrognosisHttp.name, () => {
         // Arrange
         const records = [
             {
-                CO2Emission: 100,
-                Minutes5UTC: new Date('2022-06-11T10:16+08:00'),
-                PriceArea: 'DK2'
+                co2Emission: 100,
+                minutes5UTC: new Date('2022-06-11T10:16+08:00'),
+                priceArea: 'DK2'
             }
         ]
         const co2ApiReponse = {
@@ -54,9 +54,9 @@ describe(Co2EmissionPrognosisHttp.name, () => {
         expect(whenResponse).resolves.toEqual(
             expect.arrayContaining([
                 expect.objectContaining({
-                    CO2Emission: expect.any(Number),
-                    Minutes5UTC: expect.any(Date),
-                    PriceArea: expect.any(String)
+                    co2Emission: expect.any(Number),
+                    minutes5UTC: expect.any(Date),
+                    priceArea: expect.any(String)
                 } as Co2EmissionPrognosisRecord)
             ])
         )
@@ -66,9 +66,9 @@ describe(Co2EmissionPrognosisHttp.name, () => {
         // Arrange
         const records = [
             {
-                CO2Emission: 100,
-                Minutes5UTC: new Date('2022-06-11T10:16+08:00'),
-                PriceArea: 'DK2'
+                co2Emission: 100,
+                minutes5UTC: new Date('2022-06-11T10:16+08:00'),
+                priceArea: 'DK2'
             }
         ]
         const co2ApiReponse = {

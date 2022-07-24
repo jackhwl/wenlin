@@ -7,6 +7,7 @@ import { Co2ApiResponse } from './co2-api-response'
 import { Co2ApiErrorsResponse } from './co2-api-errors-response'
 import { energiDataServiceEndpoint, energiDataSqlServiceEndpoint } from './energi-data-service-endpoint'
 import { Interval } from 'luxon'
+import { Co2EmissionPrognosisResponse } from './co2-emission-prognosis-response-item'
 
 @Injectable({
     providedIn: 'root'
@@ -15,7 +16,7 @@ import { Interval } from 'luxon'
 export class Co2EmissionPrognosisHttp {
     constructor(private http: HttpClient){}
 
-    get(interval: Interval): Observable<Co2EmissionPrognosisRecords> {
+    get(interval: Interval): Observable<Co2EmissionPrognosisResponse> {
         return this.http.get<Co2ApiResponse<Co2EmissionPrognosisRecord> | Co2ApiErrorsResponse>(energiDataServiceEndpoint, {
             params: {
                 offset: 0,
@@ -27,7 +28,8 @@ export class Co2EmissionPrognosisHttp {
             mergeMap(response => 
                 response.success 
                 ? of(response.result.records.map(record => ({ 
-                    ...record
+                    ...record,
+                    minutes5Utc: DateTime.fromISO(record.minutes5UTC)
                 })))
                 : throwError(new Error('Co2 API Error'))
             )
