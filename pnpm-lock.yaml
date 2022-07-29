@@ -2,6 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   '@angular-devkit/build-angular': ~12.2.0
+  '@angular-devkit/schematics': ^12
   '@angular-eslint/eslint-plugin': ~12.3.0
   '@angular-eslint/eslint-plugin-template': ~12.3.0
   '@angular-eslint/template-parser': ~12.3.0
@@ -25,7 +26,7 @@ specifiers:
   '@nrwl/nx-cloud': latest
   '@nrwl/tao': ~12.10.1
   '@nrwl/workspace': ~12.10.1
-  '@schematics/angular': ^14.1.0
+  '@schematics/angular': ^12
   '@types/jest': ~27.0.2
   '@types/luxon': ^2.3.2
   '@types/node': ~14.14.33
@@ -63,6 +64,7 @@ dependencies:
 
 devDependencies:
   '@angular-devkit/build-angular': 12.2.17_ikyadoxs5qz3boks72mnrvngjm
+  '@angular-devkit/schematics': 12.2.17
   '@angular-eslint/eslint-plugin': 12.3.1_gv6oxboqkxbphlqmnybuynyvkq
   '@angular-eslint/eslint-plugin-template': 12.3.1_gv6oxboqkxbphlqmnybuynyvkq
   '@angular-eslint/template-parser': 12.3.1_gv6oxboqkxbphlqmnybuynyvkq
@@ -76,7 +78,7 @@ devDependencies:
   '@nrwl/nx-cloud': 14.2.0
   '@nrwl/tao': 12.10.1
   '@nrwl/workspace': 12.10.1_prettier@2.6.2
-  '@schematics/angular': 14.1.0
+  '@schematics/angular': 12.2.17
   '@types/jest': 27.0.2
   '@types/luxon': 2.3.2
   '@types/node': 14.14.33
@@ -274,22 +276,6 @@ packages:
       rxjs: 6.6.7
       source-map: 0.7.3
 
-  /@angular-devkit/core/14.1.0:
-    resolution: {integrity: sha512-Y2d/+nFmjjY4eatc3cwdDDAnpnhG3KTX2OVW7dXSUxW3eY5e3vdMlVUbFiKwvwAshlrJy85Y6RMvZSBN4VrpnA==}
-    engines: {node: ^14.15.0 || >=16.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
-    peerDependencies:
-      chokidar: ^3.5.2
-    peerDependenciesMeta:
-      chokidar:
-        optional: true
-    dependencies:
-      ajv: 8.11.0
-      ajv-formats: 2.1.1
-      jsonc-parser: 3.1.0
-      rxjs: 6.6.7
-      source-map: 0.7.4
-    dev: true
-
   /@angular-devkit/schematics/12.2.17:
     resolution: {integrity: sha512-c0eNu/nx1Mnu7KcZgYTYHP736H4Y9pSyLBSmLAHYZv3t3m0dIPbhifRcLQX7hHQ8fGT2ZFxmOpaQG5/DcIghSw==}
     engines: {node: ^12.14.1 || >=14.0.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
@@ -297,20 +283,6 @@ packages:
       '@angular-devkit/core': 12.2.17
       ora: 5.4.1
       rxjs: 6.6.7
-    dev: false
-
-  /@angular-devkit/schematics/14.1.0:
-    resolution: {integrity: sha512-5QC01k9eznuQSiqxijKhVkAEmA8sioYuLhBzyffaPszSySH8kPMNxhAc8zJhBTNLumbS6iDaGkSqTQl5Kv9fOw==}
-    engines: {node: ^14.15.0 || >=16.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
-    dependencies:
-      '@angular-devkit/core': 14.1.0
-      jsonc-parser: 3.1.0
-      magic-string: 0.26.2
-      ora: 5.4.1
-      rxjs: 6.6.7
-    transitivePeerDependencies:
-      - chokidar
-    dev: true
 
   /@angular-eslint/eslint-plugin-template/12.3.1_gv6oxboqkxbphlqmnybuynyvkq:
     resolution: {integrity: sha512-pz+nO64ma/9Sp2aeRnQ+Vktt7Fo1Lay/J+CG//3TIc3lYsoCTj4h42P6yCcxxJ9b4N7SUxMAnchA8eE5mJS4Ug==}
@@ -3333,18 +3305,6 @@ packages:
       '@angular-devkit/core': 12.2.17
       '@angular-devkit/schematics': 12.2.17
       jsonc-parser: 3.0.0
-    dev: false
-
-  /@schematics/angular/14.1.0:
-    resolution: {integrity: sha512-lhqNZzA+iT3XwlwRU757mhYmd5WE9XB2OKFhosvvszou2zuNUJMDPR9P01ZVNCOa2fScOeCMg2q3ZDgGTBl96Q==}
-    engines: {node: ^14.15.0 || >=16.10.0, npm: ^6.11.0 || ^7.5.6 || >=8.0.0, yarn: '>= 1.13.0'}
-    dependencies:
-      '@angular-devkit/core': 14.1.0
-      '@angular-devkit/schematics': 14.1.0
-      jsonc-parser: 3.1.0
-    transitivePeerDependencies:
-      - chokidar
-    dev: true
 
   /@sinonjs/commons/1.8.3:
     resolution: {integrity: sha512-xkNcLAn/wZaX14RPlwizcKicDk9G3F8m2nU3L7Ukm5zBgTwiT0wsoFAHx9Jq56fJA1z/7uKGtCRu16sOUCLIHQ==}
@@ -3862,15 +3822,6 @@ packages:
         optional: true
     dependencies:
       ajv: 8.11.0
-
-  /ajv-formats/2.1.1:
-    resolution: {integrity: sha512-Wx0Kx52hxE7C18hkMEggYlEifqWZtYaRgouJor+WMdPnQyEK13vgEWyVNup7SoeeoLMsr4kf5h6dOW11I15MUA==}
-    peerDependenciesMeta:
-      ajv:
-        optional: true
-    dependencies:
-      ajv: 8.11.0
-    dev: true
 
   /ajv-keywords/3.5.2_ajv@6.12.6:
     resolution: {integrity: sha512-5p6WTN0DdTGVQk6VjcEju19IgaHudalcfabD7yhDGeA6bcQnmL+CpveLJq/3hvfwd1aof6L386Ougkx6RfyMIQ==}
@@ -8084,10 +8035,6 @@ packages:
   /jsonc-parser/3.0.0:
     resolution: {integrity: sha512-fQzRfAbIBnR0IQvftw9FJveWiHp72Fg20giDrHz6TdfB12UH/uue0D3hm57UB5KgAVuniLMCaS8P1IMj9NR7cA==}
 
-  /jsonc-parser/3.1.0:
-    resolution: {integrity: sha512-DRf0QjnNeCUds3xTjKlQQ3DpJD51GvDjJfnxUVWg6PZTo2otSm+slzNAxU/35hF8/oJIKoG9slq30JYOsF2azg==}
-    dev: true
-
   /jsonfile/6.1.0:
     resolution: {integrity: sha512-5dgndWOriYSm5cnYaJNhalLNDKOqFwyDB/rr1E9ZsGciGvKPs8R2xYGCacuf3z6K1YKDz182fd+fY3cn3pMqXQ==}
     dependencies:
@@ -8347,13 +8294,6 @@ packages:
     resolution: {integrity: sha512-4CrMT5DOHTDk4HYDlzmwu4FVCcIYI8gauveasrdCu2IKIFOJ3f0v/8MDGJCDL9oD2ppz/Av1b0Nj345H9M+XIA==}
     dependencies:
       sourcemap-codec: 1.4.8
-
-  /magic-string/0.26.2:
-    resolution: {integrity: sha512-NzzlXpclt5zAbmo6h6jNc8zl2gNRGHvmsZW4IvZhTC4W7k4OlLP+S5YLussa/r3ixNT66KOQfNORlXHSOy/X4A==}
-    engines: {node: '>=12'}
-    dependencies:
-      sourcemap-codec: 1.4.8
-    dev: true
 
   /make-dir/2.1.0:
     resolution: {integrity: sha512-LS9X+dc8KLxXCb8dni79fLIIUA5VyZoyjSMCwTluaXA0o27cCK0bhXkpgw+sTXVpPy/lSO57ilRixqk0vDmtRA==}
