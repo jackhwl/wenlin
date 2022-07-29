@@ -6,7 +6,7 @@
     "start": "nx serve",
     "build": "nx build",
     "test": "nx run-many --all --target=test --parallel",
-    "lint": "nx workspace-lint && nx lint --parallel",
+    "lint": "nx workspace-lint && nx run-many --target lint --all --parallel",
     "format": "nx format:write",
     "graph": "nx dep-graph",
     "postinstall": "ngcc --properties es2015 browser module main"
