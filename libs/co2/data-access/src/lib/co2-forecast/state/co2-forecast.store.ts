@@ -6,7 +6,7 @@ import { Co2EmissionPrognosisHttp } from '../http/co2-emission-prognosis-http.se
 import { Co2EmissionPrognosisRecord, Co2EmissionPrognosisRecords, Co2EmissionPrognosisRecords as Co2ForecastItem } from '../http/co2-emission-prognosis-record'
 import { DateTime, Duration, Interval } from 'luxon'
 import { TorontoDateStore, torontoZone } from '@wenlin-site/co2/util-date-times'
-import { Co2Forecast } from '../domain/co2-forecast'
+import { Co2Forecast } from '@wenlin-site/co2/domain'
 import { Co2EmissionPrognosisResponse } from '../http/co2-emission-prognosis-response-item'
 
 const twoDays = Duration.fromISO('P2D')
