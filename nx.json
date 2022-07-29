@@ -33,6 +33,9 @@
     "co2-data-access": {
       "tags": ["scope:co2", "type:data-access"]
     },
+    "co2-domain": {
+      "tags": ["scope:co2", "type:domain"]
+    },
     "co2-feature-forecast": {
       "tags": ["scope:co2", "type:feature"]
     },
