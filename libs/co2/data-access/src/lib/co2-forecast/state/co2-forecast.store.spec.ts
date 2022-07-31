@@ -48,9 +48,9 @@ describe(Co2ForecastStore.name, () => {
             // Arrange
             const result: Co2EmissionPrognosisResponse = [
                 {
-                    co2Emission: 80,
-                    minutes5UTC: DateTime.fromISO('2022-06-11T20:11-04:00'),
-                    priceArea: 'DK1'
+                    CO2Emission: 80,
+                    Minutes5UTC: DateTime.fromISO('2022-06-11T20:11-04:00'),
+                    PriceArea: 'DK1'
                 }
             ]
             const expectedForecast = result

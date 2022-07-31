@@ -29,7 +29,7 @@ export class Co2EmissionPrognosisHttp {
                 response.success 
                 ? of(response.result.records.map(record => ({ 
                     ...record,
-                    minutes5UTC: DateTime.fromISO(record.minutes5UTC)
+                    Minutes5UTC: DateTime.fromISO(record.Minutes5UTC)
                 })))
                 : throwError(new Error('Co2 API Error'))
             )

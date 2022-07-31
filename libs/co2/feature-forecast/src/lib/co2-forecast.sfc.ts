@@ -32,9 +32,9 @@ import { Co2Forecast } from '@wenlin-site/co2/domain';
         </tr>
       </thead>
       <tr *ngFor="let dataPoint of forecast">
-        <td>{{ dataPoint.minutes5UTC.toJSDate() | date }}</td>
-        <td>{{ dataPoint.co2Emission | number: '1.2' }}</td>
-        <td>{{ dataPoint.priceArea }}</td>
+        <td>{{ dataPoint.Minutes5UTC.toJSDate() | date }}</td>
+        <td>{{ dataPoint.CO2Emission | number: '1.2' }}</td>
+        <td>{{ dataPoint.PriceArea }}</td>
       </tr>
     </table>
   `,

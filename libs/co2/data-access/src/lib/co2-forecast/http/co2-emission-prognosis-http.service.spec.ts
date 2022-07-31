@@ -54,9 +54,9 @@ describe(Co2EmissionPrognosisHttp.name, () => {
         expect(whenResponse).resolves.toEqual(
             expect.arrayContaining([
                 expect.objectContaining({
-                    co2Emission: expect.any(Number),
-                    minutes5UTC: expect.any(Date),
-                    priceArea: expect.any(String)
+                    CO2Emission: expect.any(Number),
+                    Minutes5UTC: expect.any(Date),
+                    PriceArea: expect.any(String)
                 } as Co2EmissionPrognosisRecord)
             ])
         )
