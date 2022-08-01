@@ -21,8 +21,8 @@ export class Co2EmissionPrognosisHttp {
             params: {
                 offset: 0,
                 limit: 0,
-                start: interval.start.toISODate(),
-                end: interval.end.toISODate()
+                start: interval.start.toUTC().toISODate(),
+                end: interval.end.toUTC().toISODate()
             }
         }).pipe(
             mergeMap(response => 
