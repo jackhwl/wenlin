@@ -17,21 +17,21 @@ export class Co2EmissionPrognosisHttp {
     constructor(private http: HttpClient){}
 
     get(interval: Interval): Observable<Co2EmissionPrognosisResponse> {
-        return this.http.get<Co2ApiResponse<Co2EmissionPrognosisRecord> | Co2ApiErrorsResponse>(energiDataServiceEndpoint, {
+        return this.http.get<Co2ApiResponse<Co2EmissionPrognosisRecord>>(energiDataServiceEndpoint, {
             params: {
                 offset: 0,
-                limit: 5,
+                limit: 0,
                 start: interval.start.toISODate(),
                 end: interval.end.toISODate()
             }
         }).pipe(
             mergeMap(response => 
-                response.success 
-                ? of(response.result.records.map(record => ({ 
+                response.total > 0
+                ? of(response.records.map(record => ({ 
                     ...record,
                     Minutes5UTC: DateTime.fromISO(record.Minutes5UTC)
                 })))
-                : throwError(new Error('Co2 API Error'))
+                : throwError(new Error('Co2 API Error:' + JSON.stringify(response)))
             )
         )
     }
