@@ -19,13 +19,6 @@ export class TorontoDateStore extends ComponentStore<TorontoDateState> {
 
         this.setState(createInitialState(this.today()))
     }
-
-    private updateToday = this.updater<DateTime>(
-        (state, today): TorontoDateState => ({
-            ...state,
-            today,
-        })
-    )
     
     private now(): DateTime {
         return DateTime.now().setZone(torontoZone)
