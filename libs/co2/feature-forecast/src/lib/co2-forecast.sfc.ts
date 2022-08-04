@@ -42,6 +42,7 @@ import { Co2Forecast } from '@wenlin-site/co2/domain';
   `,
   viewProviders: [Co2ForecastStore],
 })
+
 export class Co2ForecastComponent {
   static ngAcceptInputType_forecast: Co2Forecast | null;
 
