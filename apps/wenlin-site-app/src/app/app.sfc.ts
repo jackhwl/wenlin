@@ -1,4 +1,5 @@
 import { Component, NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { Co2FeatureForecastModule } from '@wenlin-site/co2/feature-forecast';
 
 @Component({
@@ -9,7 +10,7 @@ import { Co2FeatureForecastModule } from '@wenlin-site/co2/feature-forecast';
       <h1>Welcome to {{ title }}!</h1>
     </header>
     <main>
-      <wl-co2-forecast></wl-co2-forecast>
+      <router-outlet></router-outlet>
     </main>
   `,
   styles: [
@@ -63,6 +64,6 @@ export class AppComponent {
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [Co2FeatureForecastModule]
+  imports: [Co2FeatureForecastModule, RouterModule],
 })
 export class AppScam {}

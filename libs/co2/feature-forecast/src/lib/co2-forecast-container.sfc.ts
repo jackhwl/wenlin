@@ -23,8 +23,7 @@ import { Co2ForecastScam } from './co2-forecast.sfc';
   ],
   template: `<wl-co2-forecast-ui
     [forecast]="forecast$ | async"
-  ></wl-co2-forecast-ui>
-  `,
+  ></wl-co2-forecast-ui> `,
   viewProviders: [Co2ForecastStore],
 })
 export class Co2ForecastContainerComponent {
@@ -37,7 +36,6 @@ export class Co2ForecastContainerComponent {
 
 @NgModule({
   declarations: [Co2ForecastContainerComponent],
-  exports: [Co2ForecastContainerComponent],
   imports: [CommonModule, Co2ForecastScam],
 })
 export class Co2ForecastContainerScam {}
