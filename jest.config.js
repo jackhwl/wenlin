@@ -1,4 +1,12 @@
 module.exports = {
+  preset: 'jest-preset-angular',
+  setupFilesAfterEnv: ['<rootDir>/test-setup.ts'],
+  globals: {
+    'jest-preset-angular/global-setup': {
+      tsconfig: '<rootDir>/tsconfig.spec.json',
+      stringifyContentPathRegex: '\\.(html|svg)$',
+    },
+  },
   projects: [
     '<rootDir>/apps/wenlin-site-app',
     '<rootDir>/libs/root/environments',

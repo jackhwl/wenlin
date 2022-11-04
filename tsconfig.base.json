@@ -1,5 +1,11 @@
 {
   "compileOnSave": false,
+  "ts-node": {
+    // these options are overrides used only by ts-node
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
   "compilerOptions": {
     "rootDir": ".",
     "sourceMap": true,
@@ -8,8 +14,9 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
+    "target": "es6",
+    "module": "commonjs",
+    "esModuleInterop": true,
     "lib": ["dom", "es2018"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
@@ -26,5 +33,6 @@
       "@wenlin-site/root/environments": ["libs/root/environments/src/index.ts"]
     }
   },
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "tmp"]
 }
